@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { EventContext, Styled } from 'direflow-component';
 import styles from './App.css';
@@ -21,16 +21,19 @@ const App = ({ mapSdkKey, coordinates, apiToken, multipleMarkers, radius, featur
   const clientSecret = 'lrFxI-iSEg-kgqGq3XC5LVQRhPninXwxzNMmxYPTTL19v0C9xQk0lkmHczUODCcZ96XUorsnalcY_T5L73yJoDwW7A-hBDED40K3OvTWtclxvqnbWQc3NW-UHsPW6ayR';
   const clientId = '33OkryzDZsI9rfIby39FyFCydkBrhakhsKIomtLNcRWnV99C20ZMiLieP00a7ePXnxjifYspcDswJWd2znZp5uRyAr-jXQPUddn2L9i0_SWaf9a_jOVKMA==';
   let timer;
-  const [coords, setCoords] = useState(coordinates)
+  const [coords, setCoords] = useState(coordinates);
+  const ref = useRef({ isMapInitiated: false })
 
   useEffect(() => {
+    console.log('my data', { mapSdkKey, coordinates, apiToken, multipleMarkers, radius, features });
     getLocation()
     // if (!localStorage.getItem('_authToken')) {
     // generateToken();
     // }
     timer = setInterval(() => {
       if (!window.MapmyIndia) {
-        if (mapSdkKey && features && features.indexOf('map') !== -1) {
+        if (mapSdkKey && features && features.indexOf('map') !== -1 && !ref.current.isMapInitiated) {
+          ref.current.isMapInitiated = true;
           setMapConfig();
         }
       } else {

@@ -8,11 +8,8 @@ const MyMap = ({ mapSdkKey, coords, handleClick, multipleMarkers, radius }) => {
     let markers = [];
     let latitudeArr = [];
     let longitudeArr = [];
-    console.log('coords   ', coords);
-
 
     useEffect(() => {
-        console.log('coords   ', coords);
         if (window.MapmyIndia) {
             const mapElement = document.getElementById('myMap');
             if (mapElement) mapElement.innerHTML = '';
@@ -22,7 +19,6 @@ const MyMap = ({ mapSdkKey, coords, handleClick, multipleMarkers, radius }) => {
                 markMultipleMarkers();
             }
         }
-        console.log('multipleMarkers', multipleMarkers);
     }, [mapSdkKey, coords, radius, multipleMarkers])
 
 

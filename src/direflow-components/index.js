@@ -2087,12 +2087,12 @@ export default DireflowComponent.create({
     // features: ['search'],
     // multipleMarkers: data,
     // radius: 5 * 1000
-    mapSdkKey: '',
-    apiToken: 'bearer f16ec428-836d-40b0-af1f-8e97dbdde507',
+    mapSdkKey: '45c6cb9384a365f919646264779a50c4',
+    apiToken: '',
     coordinates: {},
     multipleMarkers: [],
     radius: 1000,
-    features: ['search']
+    features: ['map']
   },
   plugins: [
     {
