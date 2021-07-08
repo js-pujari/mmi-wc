@@ -6,7 +6,6 @@ const Search = ({ getLatLngFromEloc, handleClick }) => {
     const context = useContext(AppContext);
     const [places, setPlaces] = useState([])
     const [showPlaces, setShowPlaces] = useState(false)
-    console.log('token from context', context);
 
     const onPlaceSearch = (e) => {
         clearTimeout(interval);
@@ -49,26 +48,21 @@ const Search = ({ getLatLngFromEloc, handleClick }) => {
 
     const onPlaseSelect = (placeDetails) => {
         setShowPlaces(false);
-        // setPlaces([]);
         myRef.current.value = placeDetails.placeName + ', ' + placeDetails.placeAddress;
-        console.log('Place details', placeDetails);
         getLatLngFromEloc(placeDetails);
-        // handleClick({ type: 'search', value: placeDetails })
     }
 
     const initTooltip = () => {
         var tooltips = [].slice.call(document.querySelectorAll('.tooltip'))
-
         tooltips.forEach(function (tooltip) {
             var tooltipSpan = tooltip.querySelector('.tooltip-content');
-
             tooltip.onmousemove = function (e) {
                 var x = e.clientX,
                     y = e.clientY;
                 tooltipSpan.style.top = (y + 20) + 'px';
                 tooltipSpan.style.left = (x + 20) + 'px';
             }
-        })
+        });
     }
 
 

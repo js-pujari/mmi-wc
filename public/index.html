@@ -6,12 +6,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mapmyindia Component</title>
+  <style>
+    #myMap {
+      height: 100vh;
+      width: 100%;
+    }
+
+    #map {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .as-marker-container {
+      display: flex !important;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .my-div-span {
+      position: absolute;
+      bottom: 1.3rem;
+    }
+
+    .map_marker_ur_here {
+      width: 2.6rem;
+    }
+  </style>
 </head>
 
 <body>
-  <!-- <div style="width: 500px;"> -->
-  <mapmyindia-webcomponent></mapmyindia-webcomponent>
-  <!-- </div> -->
+  <mmi-wc></mmi-wc>
+  <div id="myMap">
+    <div id="map"></div>
+  </div>
 </body>
 
 </html>

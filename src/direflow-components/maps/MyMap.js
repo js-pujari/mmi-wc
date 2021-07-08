@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const MyMap = ({ mapSdkKey, coords, handleClick, multipleMarkers, radius }) => {
+const MyMap = ({ mapSdkKey, coords, handleClick, multipleMarkers, radius, titleOnClick }) => {
     let map;
     let marker;
     let currentDiameter;
@@ -38,7 +38,7 @@ const MyMap = ({ mapSdkKey, coords, handleClick, multipleMarkers, radius }) => {
             marker.bindPopup(coords.title ? coords.title : 'You are here!').openPopup()
         })
         map.on('click', (e) => {
-            var title = "Map my india markers!";
+            // var title = "Map my india markers!";
 
             // markers.push(addMarker(e.coords, '', title, true));
         })
@@ -77,8 +77,10 @@ const MyMap = ({ mapSdkKey, coords, handleClick, multipleMarkers, radius }) => {
         mk.bindPopup(title);
         map.addLayer(mk);
         mk.on('click', (e) => {
+            if (!titleOnClick) {
+                map.closePopup();
+            }
             handleClick({ type: 'mapData', value: e.latlng })
-            // console.log('clicked data', e.latlng);
         })
         return mk;
     }
@@ -116,9 +118,7 @@ const MyMap = ({ mapSdkKey, coords, handleClick, multipleMarkers, radius }) => {
     }
 
     return (
-        <div id="myMap">
-            <div id="map"></div>
-        </div>
+        <></>
     )
 }
 

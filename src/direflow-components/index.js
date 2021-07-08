@@ -2075,24 +2075,17 @@ const data = [
 export default DireflowComponent.create({
   component: App,
   configuration: {
-    tagname: 'mapmyindia-webcomponent',
+    tagname: 'mmi-wc',
     useShadow: false
   },
   properties: {
-    // mapSdkKey: '45c6cb9384a365f919646264779a50c4',
-    // apiToken: 'bearer f16ec428-836d-40b0-af1f-8e97dbdde507',
-    // coordinates: {
-    //   lat: 12.9411643, lng: 77.6212899
-    // },
-    // features: ['search'],
-    // multipleMarkers: data,
-    // radius: 5 * 1000
-    mapSdkKey: '45c6cb9384a365f919646264779a50c4',
+    mapSdkKey: '',
     apiToken: '',
-    coordinates: {},
-    multipleMarkers: [],
+    features: ['map', 'search'],
+    multipleMarkers: data,
     radius: 1000,
-    features: ['map']
+    coordinates: {},
+    titleOnClick: false
   },
   plugins: [
     {

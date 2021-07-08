@@ -13,7 +13,7 @@ export const parseJSON = (response) => {
 
 export const AppContext = React.createContext({ token: '' });
 
-const App = ({ mapSdkKey, coordinates, apiToken, multipleMarkers, radius, features }) => {
+const App = ({ mapSdkKey, coordinates, apiToken, multipleMarkers, radius, features, titleOnClick }) => {
   const dispatch = useContext(EventContext);
   const [isLoaded, setIsLoaded] = useState(false);
   const tokenGeneratorUrl = 'https://outpost.mapmyindia.com/api/security/oauth/token';
@@ -25,7 +25,6 @@ const App = ({ mapSdkKey, coordinates, apiToken, multipleMarkers, radius, featur
   const ref = useRef({ isMapInitiated: false })
 
   useEffect(() => {
-    console.log('my data', { mapSdkKey, coordinates, apiToken, multipleMarkers, radius, features });
     getLocation()
     // if (!localStorage.getItem('_authToken')) {
     // generateToken();
@@ -48,6 +47,7 @@ const App = ({ mapSdkKey, coordinates, apiToken, multipleMarkers, radius, featur
   }, [coordinates])
 
   const showPosition = (position) => {
+    handleClick({ type: 'mapData', value: { lat: position.coords.latitude, lng: position.coords.longitude } })
     setCoords({ lat: position.coords.latitude, lng: position.coords.longitude })
   }
 
@@ -105,7 +105,7 @@ const App = ({ mapSdkKey, coordinates, apiToken, multipleMarkers, radius, featur
           handleClick({ type: 'search', value: { lat: x.data.latitude, lng: x.data.longitude } })
         }
       })
-      .catch(e => console.log(''))
+      .catch(e => console.log(e))
   }
 
   return (
@@ -113,17 +113,13 @@ const App = ({ mapSdkKey, coordinates, apiToken, multipleMarkers, radius, featur
       <Styled styles={styles}>
         <div className='app'>
           {(features && features.indexOf('search') !== -1) && <Search getLatLngFromEloc={getLatLngFromEloc} handleClick={handleClick} />}
-          {(isLoaded && coords) &&
-            <MyMap handleClick={handleClick} mapSdkKey={mapSdkKey} radius={radius} coords={coords} multipleMarkers={multipleMarkers} />}
+          {(isLoaded && (coords && Object.keys(coords).length > 0)) &&
+            <MyMap handleClick={handleClick} mapSdkKey={mapSdkKey} radius={radius} coords={coords} multipleMarkers={multipleMarkers} titleOnClick={titleOnClick} />}
         </div>
       </Styled>
     </AppContext.Provider>
   );
 };
-
-App.defaultProps = {
-  componentTitle: 'Mapmyindia Component',
-}
 
 App.propTypes = {
   componentTitle: PropTypes.string,
@@ -132,7 +128,8 @@ App.propTypes = {
   apiToken: PropTypes.string,
   multipleMarkers: PropTypes.array,
   radius: PropTypes.number,
-  features: PropTypes.array
+  features: PropTypes.array,
+  titleOnClick: PropTypes.bool,
 };
 
 export default App;

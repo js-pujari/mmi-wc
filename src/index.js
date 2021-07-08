@@ -11,10 +11,10 @@
 
 import MapmyindiaComponent from './direflow-components';
 
-MapmyindiaComponent.then((element) => {
+MapmyindiaComponent.then(() => {
 
   /**
    * Access DOM node when it's mounted
    */
-  console.log('mapmyindia-component is mounted on the DOM', element);
+  console.log('mmi-webc is mounted on the DOM');
 });
